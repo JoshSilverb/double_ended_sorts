@@ -26,28 +26,32 @@ public:
             typename std::vector<T>::iterator min = left;      //one past last elt of the left sorted section
             typename std::vector<T>::iterator max = right-1;   //one before first elt of right sorted section
             
-            std::cerr << min - left << " @ " << max - left << "\n";
+            //std::cerr << min - arr.begin() << " @ " << max - left << "\n";
 
             // loop thru the unsorted array to find indices of smallest and largest elements
             for(auto i=left; i != right; ++i){
-                std::cerr << "i: " << i-arr.begin() << " *i: " << *i << "\n";
+                //std::cerr << "i: " << i-arr.begin() << " *i: " << *i << "\n";
                 if(comp(*i, *min)){           //if the element is smallest in unsorted array
-                    std::cerr << *i << " < " << *min << "\n";
+                    //std::cerr << *i << " < " << *min << "\n";
                     min = i;
                 }
                 if(comp(*max, *i)){           //if the element is greatest in unsorted array
-                    std::cerr << *i << " > " << *max << "\n";
+                    //std::cerr << *i << " > " << *max << "\n";
                     max = i;
                 }
             } //finds biggest and smallest indices
             
-            std::cerr << "count: " << count++ << ":\n\tmin: " << *min << " max: " << *max << "\n";
+            //std::cerr << "count: " << count++ << ":\n\tmin: " << *min << " max: " << *max << "\n";
 
-            if(right != max) std::iter_swap(max, --right);
-            if(min != left) std::iter_swap(min, left++);
+            // checks to make sure you don't accidentally swap min away
+            if(min == --right){
+                min = max;
+            }
+            std::iter_swap(max, right);       // used to have max != right-1 and min != left checks but they're a net computation cost
+            std::iter_swap(min, left++);
             
-            for(auto l : arr) std::cout << l << " ";
-            std::cout << "\n";
+            //for(auto l : arr) std::cout << l << " ";
+            //std::cout << "\n";
 
             
         }
