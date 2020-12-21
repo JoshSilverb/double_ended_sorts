@@ -3,7 +3,7 @@ C++ library full of two-sided versions of elementary sorts with (varying) suppor
 
 ## Includes:
 - Double ended selection sort
-  - Support for STL vectors and c-style arrays
+  - Support for STL vectors, c-style arrays with size variable, and templated generic forward iterators
 
 ## Will include in the future:
 - Double ended bubble sort
